@@ -17,7 +17,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'movies',
-        loadChildren: () => import('./features/movies/movies-routing.module').then(m => m.moviesRoutes),
+        loadChildren: () => import('./features/movies/movies.module').then(m => m.MoviesModule),
         canActivate: [authGuard]
       },
       {

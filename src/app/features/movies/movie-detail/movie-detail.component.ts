@@ -1,27 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatIconModule } from '@angular/material/icon';
+import { ActivatedRoute } from '@angular/router';
 import { MovieDetail } from '../../../shared/interfaces/movie.interface';
 import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-movie-detail',
-  standalone: true,
-  imports: [
-    CommonModule,
-    DecimalPipe,
-    RouterModule,
-    MatCardModule,
-    MatButtonModule,
-    MatChipsModule,
-    MatIconModule
-  ],
   templateUrl: './movie-detail.component.html',
-  styleUrl: './movie-detail.component.scss'
+  styleUrl: './movie-detail.component.scss',
+  standalone: false,
 })
 export class MovieDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);

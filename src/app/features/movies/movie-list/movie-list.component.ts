@@ -1,13 +1,6 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MovieService } from '../services/movie.service';
-import { MovieCardComponent } from '../../../shared/components/movie-card/movie-card.component';
-import { HeroBannerComponent } from '../../../layout/hero-banner/hero-banner.component';
 import { Movie } from '../../../shared/interfaces/movie.interface';
 import { MovieDetail } from '../../../shared/interfaces/movie.interface';
 import { interval, Subscription } from 'rxjs';
@@ -15,19 +8,9 @@ import { NotificationService } from '../../../core/services/notification.service
 
 @Component({
   selector: 'app-movie-list',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    FormsModule,
-    MovieCardComponent,
-    HeroBannerComponent
-  ],
   templateUrl: './movie-list.component.html',
-  styleUrl: './movie-list.component.scss'
+  styleUrl: './movie-list.component.scss',
+  standalone: false
 })
 export class MovieListComponent implements OnInit, OnDestroy {
   private movieService = inject(MovieService);
