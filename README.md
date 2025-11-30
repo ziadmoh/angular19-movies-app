@@ -89,11 +89,6 @@ The application uses TMDb API for movie data. The API key is already configured 
 ![404 Page](screenshots/404-2.png)
 *Custom 404 error page for invalid routes*
 
-## Demo Video
-
-[![Demo Video](screenshots/movie-list-1.png)](screenshots/video.mp4)
-
-*Watch a walkthrough of the Angular Movie App features and functionality*
 ## Project Structure
 
 I have used the following structure to achieve:
