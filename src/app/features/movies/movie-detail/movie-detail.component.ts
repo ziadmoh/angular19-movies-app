@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MovieDetail } from '../../../shared/interfaces/movie.interface';
-import { environment } from '../../../../environments/environment';
+import { MovieDetail } from '@shared/interfaces/movie.interface';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-movie-detail',

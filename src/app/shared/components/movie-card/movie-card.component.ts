@@ -4,8 +4,8 @@ import { RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { Movie } from '../../interfaces/movie.interface';
-import { environment } from '../../../../environments/environment';
+import { Movie } from '@shared/interfaces/movie.interface';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-movie-card',

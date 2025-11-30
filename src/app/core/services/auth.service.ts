@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
-import { User, LoginRequest, LoginResponse } from '../../shared/interfaces/user.interface';
-import { TokenResponse } from '../../shared/interfaces/api.interface';
+import { User, LoginRequest, LoginResponse } from '@shared/interfaces/user.interface';
+import { TokenResponse } from '@shared/interfaces/api.interface';
 
 @Injectable({
   providedIn: 'root'

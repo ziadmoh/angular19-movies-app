@@ -2,8 +2,8 @@ import { inject } from '@angular/core';
 import { ResolveFn, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { MovieDetail } from '../../../shared/interfaces/movie.interface';
-import { MovieService } from '../services/movie.service';
+import { MovieDetail } from '@shared/interfaces/movie.interface';
+import { MovieService } from '@features/movies/services/movie.service';
 
 export const movieResolver: ResolveFn<MovieDetail> = (route: ActivatedRouteSnapshot): Observable<MovieDetail> => {
   const movieService = inject(MovieService);

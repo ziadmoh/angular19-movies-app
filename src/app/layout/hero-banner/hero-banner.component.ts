@@ -4,8 +4,8 @@ import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { MovieDetail } from '../../shared/interfaces/movie.interface';
-import { environment } from '../../../environments/environment';
+import { MovieDetail } from '@shared/interfaces/movie.interface';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-hero-banner',

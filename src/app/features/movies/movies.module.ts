@@ -16,8 +16,8 @@ import { MovieListComponent } from './movie-list/movie-list.component';
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 
 // Standalone Components (imported)
-import { MovieCardComponent } from '../../shared/components/movie-card/movie-card.component';
-import { HeroBannerComponent } from '../../layout/hero-banner/hero-banner.component';
+import { MovieCardComponent } from '@shared/components/movie-card/movie-card.component';
+import { HeroBannerComponent } from '@layout/hero-banner/hero-banner.component';
 
 // Routing
 import { MoviesRoutingModule } from './movies-routing.module';

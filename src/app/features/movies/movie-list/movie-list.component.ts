@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MovieService } from '../services/movie.service';
-import { Movie } from '../../../shared/interfaces/movie.interface';
-import { MovieDetail } from '../../../shared/interfaces/movie.interface';
+import { MovieService } from '@features/movies/services/movie.service';
+import { Movie } from '@shared/interfaces/movie.interface';
+import { MovieDetail } from '@shared/interfaces/movie.interface';
 import { interval, Subscription } from 'rxjs';
-import { NotificationService } from '../../../core/services/notification.service';
+import { NotificationService } from '@core/services/notification.service';
 
 @Component({
   selector: 'app-movie-list',
