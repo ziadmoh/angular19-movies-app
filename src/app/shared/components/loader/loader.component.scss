@@ -1,0 +1,21 @@
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+::ng-deep .mat-mdc-progress-bar {
+  height: 0.25rem;
+  
+  .mdc-linear-progress__buffer {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .mdc-linear-progress__bar-inner {
+    --mdc-linear-progress-active-indicator-color: var(--accent-orange);
+    background-color: var(--mdc-linear-progress-active-indicator-color);
+  }
+}

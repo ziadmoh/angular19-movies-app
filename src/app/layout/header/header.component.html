@@ -1,0 +1,47 @@
+<mat-toolbar class="header-toolbar">
+  <div class="container-fluid p-0 d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+      <a routerLink="/movies" class="logo-link">
+        <span class="logo-icon">
+          <img src="../../../assets/images/logo.webp" alt="Logo" class="logo-image">
+        </span>
+      </a>
+      <nav class="d-none d-md-flex">
+        <a routerLink="/movies" routerLinkActive="active" class="nav-link"
+          [routerLinkActiveOptions]="{exact: true}">Home</a>
+      </nav>
+    </div>
+
+    <div class="d-flex align-items-center ">
+      <!-- Search Toggle -->
+      <div class="search-wrapper">
+        @if (showSearchInput) {
+        <div class="search-input-container">
+
+          <mat-form-field appearance="fill" class="search-field" subscriptSizing="dynamic" >
+            <input matInput [(ngModel)]="searchQuery" (keyup.enter)="onSearch()"
+              (blur)="!searchQuery && (showSearchInput = false)" placeholder="Search..." >
+            <mat-icon matSuffix (click)="onSearch()" role="button">search</mat-icon>
+          </mat-form-field>
+        </div>
+        }
+        <button mat-icon-button (click)="toggleSearch()" class="search-toggle-btn" [class.active]="showSearchInput">
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+
+      <!-- Theme Toggle -->
+      <button mat-icon-button (click)="themeService.toggleTheme()" matTooltip="Toggle theme" class="theme-toggle-btn">
+        <mat-icon>{{ themeService.isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      </button>
+
+      @if (username) {
+      <div class="user-menu d-flex align-items-center">
+        <button mat-icon-button (click)="logout()" matTooltip="Logout" class="logout-btn">
+          <mat-icon>logout</mat-icon>
+        </button>
+      </div>
+      }
+    </div>
+  </div>
+</mat-toolbar>

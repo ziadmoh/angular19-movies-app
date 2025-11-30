@@ -1,0 +1,18 @@
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+}
+
+.main-content {
+  flex: 1;
+  background-color: var(--bg-primary);
+  position: relative;
+  z-index: 1;
+  padding-top: 100px;
+  position: relative;
+  @media (max-width: 767px) {
+    padding-top: 80px;
+  }
+}

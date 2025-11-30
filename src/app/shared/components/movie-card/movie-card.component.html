@@ -1,0 +1,28 @@
+<mat-card class="movie-card">
+  <div class="poster-container">
+    <img
+      [src]="posterUrl"
+      [alt]="movie.title"
+      class="poster-image poster-image--base"
+    />
+    <img
+      [src]="hoverPosterUrl"
+      [alt]="movie.title"
+      class="poster-image poster-image--hover"
+    />
+    <div class="rating-badge">
+      <mat-icon>star</mat-icon>
+      <span>{{ movie.vote_average.toFixed(1) }}</span>
+    </div>
+    <div class="movie-card-overlay">
+      <div class="overlay-gradient"></div>
+      <div class="movie-card-content">
+        <h3 class="movie-title">{{ movie.title }}</h3>
+        <button mat-raised-button color="primary" [routerLink]="['/movies', movie.id]" class="view-details-btn">
+          <mat-icon>visibility</mat-icon>
+          <span class="btn-text">View Details</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-card>

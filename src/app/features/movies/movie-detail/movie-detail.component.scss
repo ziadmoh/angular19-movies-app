@@ -1,0 +1,247 @@
+.movie-detail-container {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.backdrop-section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 500px;
+  background-size: cover;
+  background-position: top;
+  z-index: 0;
+  animation: heroFade 1s ease-in-out;
+  @media (max-width: 767px) {
+    height: 300px;
+  }
+}
+
+.backdrop-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(3, 10, 27, 0.95) 100%);
+}
+
+.movie-detail-content {
+  position: relative;
+  z-index: 1;
+  padding-top: 400px;
+  padding-bottom: var(--spacing-xl);
+  
+  @media (max-width: 767px) {
+    padding-top: 250px;
+  }
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: var(--spacing-xl);
+  align-items: start;
+  
+  @media (max-width: 991px) {
+    grid-template-columns: 250px 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+}
+
+.poster-section {
+  position: sticky;
+  top: 100px;
+  
+  @media (max-width: 767px) {
+    position: static;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+}
+
+.poster-image {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8);
+  transition: transform var(--transition-normal);
+  animation: heroFade 1s ease-in-out;
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+.movie-title {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary-static);
+  line-height: 1.2;
+  
+  @media (max-width: 991px) {
+    font-size: 2.5rem;
+  }
+  
+  @media (max-width: 767px) {
+    font-size: 2rem;
+  }
+}
+
+.movie-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+  font-size: 1.1rem;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--accent-yellow);
+  
+  mat-icon {
+    color: var(--accent-yellow);
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.meta-separator {
+  color: var(--text-tertiary);
+  margin: 0 var(--spacing-xs);
+}
+
+.release-date,
+.runtime {
+  color: var(--text-secondary);
+}
+
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-lg);
+}
+
+.genre-chip {
+  padding: 6px 16px;
+  background-color: var(--bg-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+  
+  &:hover {
+    background-color: var(--accent-pink);
+    border-color: var(--accent-pink);
+    color: var(--text-primary);
+  }
+}
+
+.about-section {
+  margin-top: var(--spacing-xl);
+}
+
+.about-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+  text-transform: lowercase;
+  
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.overview {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+  max-width: 800px;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-lg);
+  padding-left: var(--spacing-md);
+  border-left: 3px solid var(--accent-orange);
+}
+
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
+}
+
+.info-item {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+
+  strong {
+    color: var(--accent-orange);
+    margin-right: var(--spacing-xs);
+    font-weight: 600;
+  }
+}
+
+.back-button {
+  margin-top: var(--spacing-xl);
+  --mdc-filled-button-container-color: var(--accent-blue);
+  --mdc-filled-button-label-text-color: var(--text-primary);
+  --mdc-filled-button-container-shape: var(--radius-md);
+  font-weight: 500;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  transition: all var(--transition-fast);
+  border-radius: var(--radius-md);
+  mat-icon {
+    margin-right: var(--spacing-xs);
+  }
+  
+  &:hover {
+    transform: translateY(-0.125rem);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 767px) {
+  .movie-meta {
+    font-size: 1rem;
+  }
+  
+  .overview {
+    font-size: 1rem;
+  }
+  
+  .about-title {
+    font-size: 1.5rem;
+  }
+}
+@keyframes heroFade {
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

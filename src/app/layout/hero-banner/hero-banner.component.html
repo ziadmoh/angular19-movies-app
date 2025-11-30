@@ -1,0 +1,21 @@
+@if (movie) {
+  <div
+    class="hero-banner"
+    [style.background-image]="'url(' + backdropUrl + ')'"
+    [@fadeZoom]="movie.id"
+  >
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="container">
+        <h1 class="hero-title">{{ movie.title }}</h1>
+        <p class="hero-overview">{{ movie.overview | slice:0:200 }}...</p>
+        
+        <button mat-button color="primary" [routerLink]="['/movies', movie.id]" class="hero-button">
+          <mat-icon class="hero-button-icon">play_arrow</mat-icon>
+          Watch Movie
+        </button>
+      </div>
+    </div>
+  </div>
+}
+

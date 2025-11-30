@@ -1,0 +1,212 @@
+.header-toolbar {
+  background-color: rgba(3, 10, 27, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-primary);
+  padding: var(--spacing-sm) var(--spacing-md);
+  position: fixed;
+  top: var(--spacing-md);
+  left: var(--spacing-md);
+  right: var(--spacing-md);
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  min-height: 70px;
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 95%;
+  margin: auto;
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
+  
+  @media (max-width: 767px) {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    width: calc(100% - 16px);
+    border-radius: var(--radius-md);
+    padding: 8px 12px;
+    min-height: 56px;
+  }
+
+  .logo-image {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    
+    @media (max-width: 767px) {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}
+
+:host-context(html[data-theme="light"]) .header-toolbar {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.container-fluid {
+  width: 100%;
+  max-width: 100%;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  transition: opacity var(--transition-fast);
+  
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.logo-icon {
+  font-size: 1.75rem;
+  display: inline-block;
+  
+  @media (max-width: 767px) {
+    font-size: 1.25rem;
+  }
+}
+
+.nav-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  margin: 0 var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  font-weight: 500;
+  position: relative;
+  font-family: "Inter", sans-serif;
+
+  &:hover {
+    color: var(--accent-orange);
+  }
+
+  &.active {
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 10px;
+      width: 75%;
+      height: 4px;
+      background-color: var(--accent-orange);
+      border-radius: var(--radius-md);
+    }
+  }
+}
+
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+  @media (max-width: 767px) {
+    gap: 4px;
+  }
+}
+
+.search-input-container {
+  position: absolute;
+  right: 50px;
+  z-index: 10;
+  animation: slideIn 0.3s ease;
+  width: 300px;
+  
+  @media (max-width: 767px) {
+    right: 0;
+    width: 200px;
+    position: fixed;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.search-toggle-btn,
+.theme-toggle-btn,
+.logout-btn {
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  @media (max-width: 767px) {
+    width: 40px;
+    height: 40px;
+    
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+:host-context(html[data-theme="light"]) .search-toggle-btn,
+:host-context(html[data-theme="light"]) .theme-toggle-btn,
+:host-context(html[data-theme="light"]) .logout-btn {
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+  }
+}
+
+.search-toggle-btn {
+  &.active {
+    color: var(--accent-orange);
+  }
+}
+
+.logout-btn {
+  &:hover {
+    color: var(--accent-orange);
+  }
+}
+
+.user-menu {
+  margin-left: var(--spacing-sm);
+  
+  @media (max-width: 767px) {
+    margin-left: 4px;
+  }
+}
+
+::ng-deep .mat-mdc-form-field.search-field {
+  border-bottom: 0;
+  
+  .mat-mdc-text-field-wrapper {
+    background-color: transparent;
+    border-radius: 0;
+    border: 0;
+  }
+
+  .mat-mdc-form-field-input-control input {
+    color: var(--text-primary);
+    
+    &::placeholder {
+      color: var(--text-primary);
+      opacity: 0.7;
+    }
+  }
+
+  .mat-mdc-form-field-label {
+    color: var(--text-secondary);
+  }
+}
