@@ -35,7 +35,7 @@
         <mat-icon>{{ themeService.isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
       </button>
 
-      @if (username) {
+      @if (username()) {
       <div class="user-menu d-flex align-items-center">
         <button mat-icon-button (click)="logout()" matTooltip="Logout" class="logout-btn">
           <mat-icon>logout</mat-icon>

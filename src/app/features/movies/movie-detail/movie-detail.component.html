@@ -1,8 +1,8 @@
-@if (movie) {
+@if (movie()) {
   <div class="movie-detail-container">
-    <div class="backdrop-section" [style.background-image]="'url(' + backdropUrl + ')'">
+    <div class="backdrop-section" [style.background-image]="'url(' + backdropUrl() + ')'">
       <div class="backdrop-overlay d-flex justify-content-center align-items-center">
-        <h1 class="movie-title">{{ movie.title }}</h1>
+        <h1 class="movie-title">{{ movie()!.title }}</h1>
       </div>
     </div>
 
@@ -10,51 +10,51 @@
       <div class="movie-detail-content">
         <div class="detail-grid mt-4">
           <div class="poster-section">
-            <img [src]="posterUrl" [alt]="movie.title" class="poster-image">
+            <img [src]="posterUrl()" [alt]="movie()!.title" class="poster-image">
           </div>
           <div class="info-section">
             
             <div class="movie-meta">
               <span class="rating">
                 <mat-icon>star</mat-icon>
-                {{ movie.vote_average.toFixed(1) }}
+                {{ movie()!.vote_average.toFixed(1) }}
               </span>
               <span class="meta-separator">•</span>
-              <span class="release-date">{{ movie.release_date | date: 'yyyy' }}</span>
-              @if (movie.runtime) {
+              <span class="release-date">{{ movie()!.release_date | date: 'yyyy' }}</span>
+              @if (movie()!.runtime) {
                 <span class="meta-separator">•</span>
-                <span class="runtime">{{ movie.runtime }}m</span>
+                <span class="runtime">{{ movie()!.runtime }}m</span>
               }
             </div>
 
-            @if (movie.genres && movie.genres.length > 0) {
+            @if (movie()!.genres && movie()!.genres.length > 0) {
               <div class="genres">
-                @for (genre of movie.genres; track genre.id) {
+                @for (genre of movie()!.genres; track genre.id) {
                   <span class="genre-chip">{{ genre.name }}</span>
                 }
               </div>
             }
 
             <div class="about-section">
-              <h2 class="about-title">about {{ movie.title }}</h2>
-              <p class="overview">{{ movie.overview }}</p>
+              <h2 class="about-title">about {{ movie()!.title }}</h2>
+              <p class="overview">{{ movie()!.overview }}</p>
               
-              @if (movie.tagline) {
-                <p class="tagline">"{{ movie.tagline }}"</p>
+              @if (movie()!.tagline) {
+                <p class="tagline">"{{ movie()!.tagline }}"</p>
               }
 
               <div class="movie-info">
                 <div class="info-item">
-                  <strong>Status:</strong> {{ movie.status }}
+                  <strong>Status:</strong> {{ movie()!.status }}
                 </div>
-                @if (movie.budget > 0) {
+                @if (movie()!.budget > 0) {
                   <div class="info-item">
-                    <strong>Budget:</strong> ${{ movie.budget | number: '1.0-0' }}
+                    <strong>Budget:</strong> ${{ movie()!.budget | number: '1.0-0' }}
                   </div>
                 }
-                @if (movie.revenue > 0) {
+                @if (movie()!.revenue > 0) {
                   <div class="info-item">
-                    <strong>Revenue:</strong> ${{ movie.revenue | number: '1.0-0' }}
+                    <strong>Revenue:</strong> ${{ movie()!.revenue | number: '1.0-0' }}
                   </div>
                 }
               </div>

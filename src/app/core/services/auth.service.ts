@@ -1,7 +1,7 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { User, LoginRequest, LoginResponse } from '@shared/interfaces/user.interface';
 import { TokenResponse } from '@shared/interfaces/api.interface';
@@ -17,8 +17,13 @@ export class AuthService {
   private readonly REFRESH_TOKEN_KEY = 'refreshToken';
   private readonly USER_KEY = 'user';
   
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
-  public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
+  private readonly _isAuthenticated = signal<boolean>(this.hasToken());
+  public readonly user = signal<string | null>(this.getUser());
+
+  // Public getter for authentication state
+  get isAuthenticated(): boolean {
+    return this._isAuthenticated();
+  }
 
   constructor() {
     this.checkAuthStatus();
@@ -47,7 +52,8 @@ export class AuthService {
 
         this.setTokens(accessToken, refreshToken);
         this.setUser(user.username);
-        this.isAuthenticatedSubject.next(true);
+        this._isAuthenticated.set(true);
+        this.user.set(user.username);
 
         return loginResponse;
       }),
@@ -61,7 +67,8 @@ export class AuthService {
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.REFRESH_TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);
-    this.isAuthenticatedSubject.next(false);
+    this._isAuthenticated.set(false);
+    this.user.set(null);
     this.router.navigate(['/login']);
   }
 
@@ -75,10 +82,6 @@ export class AuthService {
 
   getUser(): string | null {
     return localStorage.getItem(this.USER_KEY);
-  }
-
-  isAuthenticated(): boolean {
-    return this.hasToken();
   }
 
   refreshToken(): Observable<TokenResponse> {
@@ -111,6 +114,7 @@ export class AuthService {
 
   private setUser(username: string): void {
     localStorage.setItem(this.USER_KEY, username);
+    this.user.set(username);
   }
 
   private hasToken(): boolean {
@@ -118,7 +122,11 @@ export class AuthService {
   }
 
   private checkAuthStatus(): void {
-    this.isAuthenticatedSubject.next(this.hasToken());
+    const hasToken = this.hasToken();
+    this._isAuthenticated.set(hasToken);
+    if (hasToken) {
+      this.user.set(this.getUser());
+    }
   }
 
   private generateToken(): string {

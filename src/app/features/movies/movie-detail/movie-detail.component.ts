@@ -1,5 +1,7 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs/operators';
 import { MovieDetail } from '@shared/interfaces/movie.interface';
 import { environment } from '@environments/environment';
 
@@ -9,29 +11,32 @@ import { environment } from '@environments/environment';
   styleUrl: './movie-detail.component.scss',
   standalone: false,
 })
-export class MovieDetailComponent implements OnInit {
+export class MovieDetailComponent {
   private route = inject(ActivatedRoute);
   
-  movie: MovieDetail | null = null;
+  // Convert route data observable to signal
+  private routeData = toSignal(
+    this.route.data.pipe(map(data => data['movie'] as MovieDetail | null)),
+    { initialValue: null }
+  );
+  
+  movie = this.routeData;
 
-  ngOnInit(): void {
-    this.route.data.subscribe(data => {
-      this.movie = data['movie'];
-    });
-  }
-
-  get posterUrl(): string {
-    if (this.movie?.poster_path) {
-      return `${environment.tmdbImageUrl}${this.movie.poster_path}`;
+  // Computed signals for URLs
+  posterUrl = computed(() => {
+    const currentMovie = this.movie();
+    if (currentMovie?.poster_path) {
+      return `${environment.tmdbImageUrl}${currentMovie.poster_path}`;
     }
     return 'https://placehold.co/300x450?text=No+Image';
-  }
+  });
 
-  get backdropUrl(): string {
-    if (this.movie?.backdrop_path) {
-      return `${environment.tmdbBackdropUrl}${this.movie.backdrop_path}`;
+  backdropUrl = computed(() => {
+    const currentMovie = this.movie();
+    if (currentMovie?.backdrop_path) {
+      return `${environment.tmdbBackdropUrl}${currentMovie.backdrop_path}`;
     }
     return '';
-  }
+  });
 }
 

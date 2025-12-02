@@ -34,12 +34,8 @@ export class HeaderComponent {
   public themeService = inject(ThemeService);
   
   searchQuery: string = '';
-  username: string | null = null;
+  username = this.authService.user; // Use signal directly
   showSearchInput: boolean = false;
-
-  constructor() {
-    this.username = this.authService.getUser();
-  }
 
   toggleSearch(): void {
     this.showSearchInput = !this.showSearchInput;

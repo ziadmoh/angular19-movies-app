@@ -1,20 +1,20 @@
 <div class="movie-list-container">
-  <app-hero-banner [movie]="featuredMovie"></app-hero-banner>
+  <app-hero-banner [movie]="featuredMovie()"></app-hero-banner>
 
   <div class="container-fluid">
     <!-- Latest Releases Section -->
-    @if (!searchQuery) {
+    @if (!searchQuery()) {
       <section class="movies-section">
         <div class="section-header">
           <h2 class="section-title">Latest Releases</h2>
         </div>
-        @if (isLoading) {
+        @if (isLoading()) {
           <div class="loading-state">
             <p>Loading movies...</p>
           </div>
         } @else {
           <div class="movies-carousel">
-            @for (movie of popularMovies; track movie.id) {
+            @for (movie of popularMovies(); track movie.id) {
               <div class="movie-card-wrapper">
                 <app-movie-card [movie]="movie"></app-movie-card>
               </div>
@@ -28,13 +28,13 @@
         <div class="section-header">
           <h2 class="section-title">Top Rated</h2>
         </div>
-        @if (isLoading) {
+        @if (isLoading()) {
           <div class="loading-state">
             <p>Loading movies...</p>
           </div>
         } @else {
           <div class="movies-carousel">
-            @for (movie of topRatedMovies; track movie.id) {
+            @for (movie of topRatedMovies(); track movie.id) {
               <div class="movie-card-wrapper">
                 <app-movie-card [movie]="movie"></app-movie-card>
               </div>
@@ -46,19 +46,19 @@
       <!-- Search Results -->
       <section class="movies-section">
         <div class="section-header">
-          <h2 class="section-title">Search Results for "{{ searchQuery }}"</h2>
+          <h2 class="section-title">Search Results for "{{ searchQuery() }}"</h2>
         </div>
-        @if (isLoading) {
+        @if (isLoading()) {
           <div class="loading-state">
             <p>Searching movies...</p>
           </div>
-        } @else if (popularMovies.length === 0) {
+        } @else if (popularMovies().length === 0) {
           <div class="empty-state">
             <p>No movies found.</p>
           </div>
         } @else {
           <div class="movies-carousel">
-            @for (movie of popularMovies; track movie.id) {
+            @for (movie of popularMovies(); track movie.id) {
               <div class="movie-card-wrapper">
                 <app-movie-card [movie]="movie"></app-movie-card>
               </div>
