@@ -201,13 +201,17 @@ src/app/
                     │   • Validates credentials     │
                     │   • Generates tokens          │
                     │   • Stores in localStorage    │
+                    │   • Updates isAuthenticated   │
+                    │     signal                    │
+                    │   • Updates user signal       │
                     └───────────────┬───────────────┘
                                     │
-                                    │ Token stored
+                                    │ Signals updated
                                     │
                     ┌───────────────▼───────────────┐
                     │   AuthGuard                   │
-                    │   • Checks authentication     │
+                    │   • Checks isAuthenticated     │
+                    │     signal/getter              │
                     │   • Protects routes           │
                     └───────────────┬───────────────┘
                                     │
@@ -225,8 +229,10 @@ src/app/
                                     │
                     ┌───────────────▼───────────────┐
                     │   MovieListComponent          │
-                    │   • ngOnInit()                │
+                    │   • Uses effect() to watch    │
+                    │     route queryParams signal  │
                     │   • Loads popular/top-rated   │
+                    │   • Updates state signals     │
                     └───────────────┬───────────────┘
                                     │
                                     │ getPopularMovies()
@@ -242,8 +248,8 @@ src/app/
                                     │
                     ┌───────────────▼───────────────┐
                     │   LoaderInterceptor           │
-                    │   • Shows loading indicator   │
-                    │   • Hides on response         │
+                    │   • Updates loading signal    │
+                    │   • LoaderService.loading()   │
                     └───────────────┬───────────────┘
                                     │
                                     │ HTTP Request
@@ -264,7 +270,8 @@ src/app/
                                     │
                     ┌───────────────▼───────────────┐
                     │   MovieListComponent          │
-                    │   • Updates UI                │
+                    │   • Updates state signals     │
+                    │   • Template reads signals    │
                     │   • Displays movie cards      │
                     └───────────────────────────────┘
 
@@ -289,8 +296,10 @@ src/app/
                                     │
                     ┌───────────────▼───────────────┐
                     │   MovieDetailComponent        │
+                    │   • Uses toSignal() for route │
+                    │     data                      │
+                    │   • Computed signals for URLs │
                     │   • Displays movie info       │
-                    │   • Shows backdrop/poster     │
                     └───────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -306,7 +315,8 @@ src/app/
                                     │
                     ┌───────────────▼───────────────┐
                     │   MovieListComponent          │
-                    │   • Reads query params        │
+                    │   • effect() watches query    │
+                    │     params signal             │
                     │   • Calls searchMovies()      │
                     └───────────────┬───────────────┘
                                     │
@@ -321,7 +331,8 @@ src/app/
                                     │
                     ┌───────────────▼───────────────┐
                     │   MovieListComponent          │
-                    │   • Displays search results   │
+                    │   • Updates state signals     │
+                    │   • Template reads signals    │
                     │   • Shows search banner       │
                     └───────────────────────────────┘
 
@@ -400,7 +411,7 @@ Routes are configured with lazy loading for optimal performance:
 
 ### 4. HTTP Interceptors
 - **AuthTokenInterceptor**: Automatically adds authentication tokens to HTTP requests
-- **LoaderInterceptor**: Shows/hides global loading indicator for all HTTP requests
+- **LoaderInterceptor**: Updates loading signal for global loading indicator
 - **Centralized logic**: Reduces code duplication across services
 
 ### 5. Service-Based Architecture
@@ -424,10 +435,17 @@ Routes are configured with lazy loading for optimal performance:
 - **Better UX**: Data available immediately when component loads
 - **Error handling**: Invalid movie IDs redirect to 404 page
 
-### 9. Reactive Programming
-- **RxJS Observables**: All HTTP calls use Observables
+### 9. Reactive Programming with Signals
+- **Angular Signals**: Primary state management mechanism throughout the application
+  - **AuthService**: Uses signals for authentication state (`isAuthenticated`, `user`)
+  - **LoaderService**: Uses signal for loading state (`loading`)
+  - **Components**: Use signals for local state (movies, featured movie, search query)
+  - **Route Data**: Converted to signals using `toSignal()` for reactive route data
+  - **Computed Signals**: Used for derived state (poster URLs, backdrop URLs)
+  - **Effects**: Used to reactively watch signal changes (search query watching)
+- **RxJS Observables**: Used for HTTP calls and async operations
 - **Reactive forms**: Login form uses ReactiveFormsModule
-- **Signal-based state**: Theme management uses Angular Signals
+- **Signal-based state**: Theme management, authentication, loading, and component state all use Angular Signals
 
 ### 10. Responsive Design
 - **Mobile-first approach**: Styles optimized for mobile devices
