@@ -19,12 +19,15 @@
   
   @media (max-width: 767px) {
     top: 8px;
-    left: 8px;
-    right: 8px;
+    left: 0;
+    right: 0;
     width: calc(100% - 16px);
     border-radius: var(--radius-md);
     padding: 8px 12px;
     min-height: 56px;
+    margin-left: 0;
+    margin-right: 8px;
+    justify-self: center;
   }
 
   .logo-image {
